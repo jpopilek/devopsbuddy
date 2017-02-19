@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import com.devopsbuddy.backend.service.UserSecurityService;
 
 /**
  * Created by tedonema on 26/03/2016.
@@ -20,13 +21,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private Environment env;
+	private UserSecurityService userSecurityService;
 
+	@Autowired
+	private Environment env;
 
 	/** Public URLs. */
 	private static final String[] PUBLIC_MATCHERS = { "/webjars/**", "/css/**", "/js/**", "/images/**", "/",
-			"/about/**", "/contact/**", "/error/**/*", "/console/**",
-	};
+			"/about/**", "/contact/**", "/error/**/*", "/console/**" };
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -44,7 +46,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		// auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder());
-		auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
+		auth.userDetailsService(userSecurityService);
 	}
 }

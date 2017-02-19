@@ -5,12 +5,12 @@ import com.devopsbuddy.backend.persistence.domain.backend.User;
 /**
  * Created by tedonema on 30/03/2016.
  */
-public class UsersUtils {
+public class UserUtils {
 
     /**
      * Non instantiable.
      */
-    private UsersUtils() {
+    private UserUtils() {
         throw new AssertionError("Non instantiable");
     }
 
@@ -21,8 +21,8 @@ public class UsersUtils {
     public static User createBasicUser() {
 
         User user = new User();
-        user.setUsername("basicUser");
-        user.setPassword("secret");
+    user.setUsername("user");
+    user.setPassword("password");
         user.setEmail("me@example.com");
         user.setFirstName("firstName");
         user.setLastName("lastName");
