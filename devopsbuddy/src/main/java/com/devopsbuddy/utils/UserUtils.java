@@ -7,31 +7,34 @@ import com.devopsbuddy.backend.persistence.domain.backend.User;
  */
 public class UserUtils {
 
-    /**
-     * Non instantiable.
-     */
-    private UserUtils() {
-        throw new AssertionError("Non instantiable");
-    }
+  /**
+   * Non instantiable.
+   */
+  private UserUtils() {
+    throw new AssertionError("Non instantiable");
+  }
 
-    /**
-     * Creates a user with basic attributes set.
-     * @return A User entity
-     */
-    public static User createBasicUser() {
+  /**
+   * Creates a user with basic attributes set.
+   * 
+   * @param username The username.
+   * @param email The email.
+   * @return A User entity
+   */
+  public static User createBasicUser(String username, String email) {
 
-        User user = new User();
-    user.setUsername("user");
+    User user = new User();
+    user.setUsername(username);
     user.setPassword("password");
-        user.setEmail("me@example.com");
-        user.setFirstName("firstName");
-        user.setLastName("lastName");
-        user.setPhoneNumber("123456789123");
-        user.setCountry("GB");
-        user.setEnabled(true);
-        user.setDescription("A basic user");
-		user.setProfileImageUrl("https://blabla.images.com/basicuser");
+    user.setEmail(email);
+    user.setFirstName("firstName");
+    user.setLastName("lastName");
+    user.setPhoneNumber("123456789123");
+    user.setCountry("GB");
+    user.setEnabled(true);
+    user.setDescription("A basic user");
+    user.setProfileImageUrl("https://blabla.images.com/basicuser");
 
-        return user;
-    }
+    return user;
+  }
 }
