@@ -9,7 +9,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -18,9 +17,6 @@ import com.devopsbuddy.backend.persistence.domain.backend.Plan;
 import com.devopsbuddy.backend.persistence.domain.backend.Role;
 import com.devopsbuddy.backend.persistence.domain.backend.User;
 import com.devopsbuddy.backend.persistence.domain.backend.UserRole;
-import com.devopsbuddy.backend.persistence.repositories.PlanRepository;
-import com.devopsbuddy.backend.persistence.repositories.RoleRepository;
-import com.devopsbuddy.backend.persistence.repositories.UserRepository;
 import com.devopsbuddy.enums.PlansEnum;
 import com.devopsbuddy.enums.RolesEnum;
 import com.devopsbuddy.utils.UserUtils;
@@ -30,16 +26,8 @@ import com.devopsbuddy.utils.UserUtils;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = DevopsbuddyApplication.class)
-public class RepositoriesIntegrationTest {
+public class UserIntegrationTest extends AbstractIntegrationTest {
 
-    @Autowired
-    private PlanRepository planRepository;
-
-    @Autowired
-    private RoleRepository roleRepository;
-
-    @Autowired
-    private UserRepository userRepository;
 
   @Rule
   public TestName testName = new TestName();
@@ -91,27 +79,16 @@ public class RepositoriesIntegrationTest {
 
   }
 
-  @Test
-  public void testDeleteUser() throws Exception {
 
-    String username = testName.getMethodName();
-    String email = testName.getMethodName() + "@devopsbuddy.com";
-
-    User basicUser = createUser(username, email);
-    userRepository.delete(basicUser.getId());
-  }
-
-  // -----------------> Private methods
-
-  private Plan createPlan(PlansEnum plansEnum) {
+  protected Plan createPlan(PlansEnum plansEnum) {
     return new Plan(plansEnum);
   }
 
-  private Role createRole(RolesEnum rolesEnum) {
+  protected Role createRole(RolesEnum rolesEnum) {
     return new Role(rolesEnum);
   }
 
-  private User createUser(String username, String email) {
+  protected User createUser(String username, String email) {
     Plan basicPlan = createPlan(PlansEnum.BASIC);
     planRepository.save(basicPlan);
 
