@@ -15,7 +15,9 @@ import javax.persistence.ManyToOne;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters.LocalDateConverter;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.devopsbuddy.backend.persistence.converters.LocalDateTimeAttributeConverter;
 
 
 
@@ -44,8 +46,9 @@ public class PasswordResetToken implements Serializable {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@Column(name = "expiry_date")
-	@Convert(converter = LocalDateConverter.class)
+  @Autowired
+  @Column(name = "expiry_date")
+  @Convert(converter = LocalDateTimeAttributeConverter.class)
 	private LocalDateTime expiryDate;
 
 	/**

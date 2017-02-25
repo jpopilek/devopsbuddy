@@ -1,3 +1,4 @@
+package com.devopsbuddy.test.integration;
 
 
 import org.junit.Assert;
